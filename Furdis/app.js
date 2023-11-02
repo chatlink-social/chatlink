@@ -1,73 +1,84 @@
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js';
-import { getAuth, createUserWithEmailAndPassword, signOut } from 'https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js';
+const carousel = document.querySelector('.carousel');
+let sliders = [];
 
-const firebaseConfig = {
-    apiKey: "AIzaSyADQaCmgSResQZwjEVc4_urPtmrHA4XfBQ",
-    authDomain: "furdis-5ed02.firebaseapp.com",
-    databaseURL: "https://furdis-5ed02-default-rtdb.firebaseio.com",
-    projectId: "furdis-5ed02",
-    storageBucket: "furdis-5ed02.appspot.com",
-    messagingSenderId: "903306743411",
-    appId: "1:903306743411:web:db5f4f6f6eb3fccce2e406",
-    measurementId: "G-5QF5VH3STM"
-};
+let slideIndex = 0; // to track current slide index.
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
+const createSlide = () => {
+    if(slideIndex >= movies.length){
+        slideIndex = 0;
+    }
 
-const connexionButton = document.getElementById('connexionButton');
-const inscriptionButton = document.getElementById('inscriptionButton');
-const authForms = document.getElementById('auth-forms');
-const confirmationMessage = document.getElementById('confirmationMessage');
-const afirmationMessage = document.getElementById('afirmationMessage');
+    // creating DOM element
+    let slide = document.createElement('div');
+    let imgElement = document.createElement('img');
+    let content = document.createElement('div');
+    let h1 = document.createElement('h1');
+    let p = document.createElement('p');
 
-connexionButton.addEventListener('click', () => {
-    authForms.classList.remove('hidden');
-    confirmationMessage.classList.add('hidden');
-    afirmationMessage.classList.add('hidden');
-    document.getElementById('connexionForm').classList.remove('hidden');
-    document.getElementById('inscriptionForm').classList.add('hidden');
-});
+        // attaching all elements
+        imgElement.appendChild(document.createTextNode(''));
+        h1.appendChild(document.createTextNode(movies[slideIndex].name));
+        p.appendChild(document.createTextNode(movies[slideIndex].des));
+        content.appendChild(h1);
+        content.appendChild(p);
+        slide.appendChild(content);
+        slide.appendChild(imgElement);
+        carousel.appendChild(slide);
+    
 
-inscriptionButton.addEventListener('click', () => {
-    authForms.classList.remove('hidden');
-    confirmationMessage.classList.add('hidden');
-    afirmationMessage.classList.add('hidden');
-    document.getElementById('inscriptionForm').classList.remove('hidden');
-    document.getElementById('connexionForm').classList.add('hidden');
-});
+      
+        // setting up image
+        imgElement.src = movies[slideIndex].image;
+        slideIndex++;
+    
+        // setting elements classname
+        slide.className = 'slider';
+        content.className = 'slide-content';
+        h1.className = 'movie-title';
+        p.className = 'movie-des';
+    
+        sliders.push(slide);
+    
+        if(sliders.length){
+                sliders[0].style.marginLeft = `calc(-${100 * (sliders.length - 2)}% - ${30 * (sliders.length - 2)}px)`;
+        }
+}    
+ 
+for(let i = 0; i < 3; i++){
+    createSlide();
+}
 
-const connexionForm = document.getElementById('connexionForm');
-const emailConnexion = document.getElementById('emailConnexion');
-const passwordConnexion = document.getElementById('passwordConnexion');
+setInterval(() => {
+    createSlide();
+}, 6000);
 
-connexionForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const email = emailConnexion.value;
-    const password = passwordConnexion.value;
+const videoCards = [...document.querySelectorAll('.video-card')];
 
-    // Ajoutez ici le code pour la connexion
-});
+videoCards.forEach(item => {
+    item.addEventListener('mouseover', () => {
+        let video = item.children[1];
+        video.play();
+    })
+    item.addEventListener('mouseleave', () => {
+        let video = item.children[1];
+        video.pause();
+    })
+})
 
-const inscriptionForm = document.getElementById('inscriptionForm');
-const usernameInscription = document.getElementById('usernameInscription');
-const emailInscription = document.getElementById('emailInscription');
-const passwordInscription = document.getElementById('passwordInscription');
 
-inscriptionForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const email = emailInscription.value;
-    const password = passwordInscription.value;
+let cardContainers = [...document.querySelectorAll('.card-container')];
+let preBtns = [...document.querySelectorAll('.pre-btn')];
+let nxtBtns = [...document.querySelectorAll('.nxt-btn')];
 
-    createUserWithEmailAndPassword(auth, email, password)
-        .then((userCredential) => {
-            // Nouvel utilisateur créé avec succès
-            const user = userCredential.user;
-            confirmationMessage.classList.remove('hidden');
-        })
-        .catch((error) => {
-            // Gestion des erreurs d'inscription
-            const user = userCredential.user;
-            afirmationMessage.classList.remove('hidden');
-        });
-});
+cardContainers.forEach((item, i) => {
+    let containerDimensions = item.getBoundingClientRect();
+    let containerWidth = containerDimensions.width;
+
+    nxtBtns[i].addEventListener('click', () => {
+        item.scrollLeft += containerWidth - 200;
+    })
+
+    preBtns[i].addEventListener('click', () => {
+        item.scrollLeft -= containerWidth + 200;
+    })
+})

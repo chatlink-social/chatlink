@@ -1,47 +1,49 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Votre Application Furry</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CineProd - des films à volonté</title>
+    <script type="module" src="authcon.js"></script>
+    <script type="module" src="userstate.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="/images/logo_night.png" type="image/x-icon">
 </head>
 <body>
-    <h1>Bienvenue sur Votre Application Furry</h1>
-
-    <div class="auth-buttons">
-        <button id="connexionButton">Connexion</button>
-        <button id="inscriptionButton">Inscription</button>
+    
+<nav class="navbar">
+    <img src="images/logo_night.png" class="brand-logo" alt="">
+    <ul class="nav-links">
+        <li class="nav-items">
+            <a href="#">
+                <img src="images/home.png" alt=""> HOME
+            </a>
+        </li>
+        <li class="nav-items">
+            <a href="#">
+                <img src="images/search.png" alt=""> SEARCH
+            </a>
+        </li>
+        <!--<li class="nav-items">
+            <a href="#">
+                <img src="images/plus.png" alt=""> 
+            </a>
+        </li>-->
+    </ul>
+    <div class="right-container" id="auth-container">
+        
     </div>
+</nav>
 
-    <div id="auth-forms" class="hidden">
-        <!-- Formulaire de Connexion -->
-        <form id="connexionForm" class="auth-form">
-            <h2>Connexion</h2>
-            <input type="email" id="emailConnexion" placeholder="Adresse e-mail" required>
-            <input type="password" id="passwordConnexion" placeholder="Mot de passe" required>
-            <button type="submit">Se connecter</button>
-        </form>
 
-        <!-- Formulaire d'Inscription -->
-        <form id="inscriptionForm" class="auth-form">
-            <h2>Inscription</h2>
-            <input type="text" id="usernameInscription" placeholder="Nom d'utilisateur" required>
-            <input type="email" id="emailInscription" placeholder="Adresse e-mail" required>
-            <input type="password" id="passwordInscription" placeholder="Mot de passe" required>
-            <button type="submit">S'inscrire</button>
-        </form>
-    </div>
-
-    <!-- Message de confirmation après inscription -->
-    <div id="confirmationMessage" class="hidden">
-        <p>Votre compte a été créé avec succès !</p>
-    </div>
-    <div id="affirmationMessage" class="false">
-        <p>Votre compte na pas été creer !</p>
-    </div>
-
-    <script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.5.2/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.2.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.2.0/firebase-auth.js"></script>
+    
+    <script src="data.js"></script>
     <script src="app.js"></script>
+    <script src="userstate.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
 </body>
 </html>
