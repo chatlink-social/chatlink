@@ -55,6 +55,17 @@
         button[type="submit"]:hover {
             background-color: #0056b3;
         }
+        h6 {
+            color: grey;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    margin-top: 1vw;
+    font-family: sans-serif;
+        }
+        a {
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
@@ -65,6 +76,7 @@
             <input type="email" id="email" name="email" placeholder="Email">
             <input type="password" id="password" name="password" placeholder="Mot de passe">
             <button type="submit">S'inscrire</button>
+            <h6>Déjà inscrit ? <a href="connexion.html">&#xA0;connecte toi</a></h6>
         </form>
     </div>
     <script type="module" src="auth.js"></script>

@@ -17,8 +17,8 @@ const auth = getAuth(app);
 const loginForm = document.getElementById('login-form');
 loginForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const email = loginForm['login-email'].value;
-    const password = loginForm['login-password'].value;
+    const email = loginForm['email'].value;
+    const password = loginForm['password'].value;
 
     try {
         const userCredential = await signInWithEmailAndPassword(auth, email, password);

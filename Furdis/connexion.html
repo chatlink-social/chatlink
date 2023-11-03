@@ -53,15 +53,27 @@
         button[type="submit"]:hover {
             background-color: #0056b3;
         }
+        h6 {
+            color: grey;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    margin-top: 1vw;
+    font-family: sans-serif;
+        }
+        a {
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <form id="login-form">
             <h1>Connexion</h1>
-            <input type="email" id="login-email" name="login-email" placeholder="Email">
-            <input type="password" id="login-password" name="login-password" placeholder="Mot de passe">
+            <input type="email" id="email" name="email" placeholder="Email" required>
+            <input type="password" id="password" name="password" placeholder="Mot de passe" required>
             <button type="submit">Se connecter</button>
+            <h6>Pas inscrit ? <a href="inscription.html">&#xA0;inscrit toi</a></h6>
         </form>
     </div>
     <script type="module" src="authcon.js"></script>
